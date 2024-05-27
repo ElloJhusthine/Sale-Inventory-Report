@@ -1,0 +1,27 @@
+<!-- HTML for sales inventory system -->
+<button onclick="addSale('Product A', 10, 100)">Add Sale</button>
+
+<script>
+// JavaScript for sales inventory system
+function addSale(product, quantity, price) {
+    // Send request to update inventory
+    fetch('/add-sale', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ product, quantity, price })
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Sale added successfully!');
+        } else {
+            alert('Failed to add sale. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again later.');
+    });
+}
+</script>

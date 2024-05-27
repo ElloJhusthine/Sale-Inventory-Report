@@ -1,0 +1,30 @@
+<!-- HTML for sales report system -->
+<button onclick="generateReport()">Generate Report</button>
+<div id="salesReport"></div>
+
+<script>
+// JavaScript for sales report system
+function generateReport() {
+    // Send request to get sales report data
+    fetch('/sales-report')
+        .then(response => response.json())
+        .then(data => {
+            displayReport(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to generate sales report. Please try again later.');
+        });
+}
+
+// Display sales report data
+function displayReport(data) {
+    const reportElement = document.getElementById('salesReport');
+    reportElement.innerHTML = '<h2>Sales Report</h2>';
+    reportElement.innerHTML += '<ul>';
+    data.forEach(sale => {
+        reportElement.innerHTML += `<li>${sale.product} - Quantity: ${sale.quantity}, Price: ${sale.price}</li>`;
+    });
+    reportElement.innerHTML += '</ul>';
+}
+</script>
